@@ -2,20 +2,31 @@ import Layout from '@/Components/Layout/index'
 import Header from '@/Components/Layout/Header'
 import Slider from '@/Components/Layout/Slider'
 import Categories from '@/Components/Categories'
-import Discussions from '@/Components/Discusssions'
+import PostsNav from '@/Components/PostsNav'
+import { ConfigProvider } from 'antd'
+
+import 'antd/dist/reset.css'
 
 function App() {
   return (
-    <Layout direction="vertical">
-      <Header />
-      <Categories />
-      <div className="layout-content">
-        <Slider>
-          <Discussions />
-        </Slider>
-        <main className="layout-content-container">content</main>
-      </div>
-    </Layout>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#3e7aab'
+        }
+      }}
+    >
+      <Layout direction="vertical">
+        <Header />
+        <Categories />
+        <div className="layout-content">
+          <Slider>
+            <PostsNav />
+          </Slider>
+          <main className="layout-content-container">content</main>
+        </div>
+      </Layout>
+    </ConfigProvider>
   )
 }
 
