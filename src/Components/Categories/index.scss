@@ -1,0 +1,13 @@
+.categories {
+  height: 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: #e8e8ea;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  box-sizing: border-box;
+  color: #666;
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0 10px;
+}

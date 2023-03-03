@@ -1,0 +1,26 @@
+$color: red;
+$header-height: 45px;
+$header-bg: #3e7aab;
+
+.layout {
+  height: 100%;
+  display: flex;
+  &-vertical {
+    flex-direction: column;
+  }
+  &-header {
+    height: $header-height;
+    background-color: $header-bg;
+  }
+  &-content {
+    flex: 1;
+    display: flex;
+    &-container {
+      flex: 1;
+      background-color: #eaeef4;
+    }
+  }
+  &-slider {
+    width: 300px;
+  }
+}
