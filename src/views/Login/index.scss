@@ -1,0 +1,18 @@
+.login-wrap {
+    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-area {
+    padding: 30px 40px;
+    width: 400px;
+    border-radius: 4px;
+    // border: 1px solid #eee;
+    box-shadow: 1px 1px 10px #ccc;
+    & > h2 {
+        text-align: center;
+        padding: 4px 0;
+
+    }
+  }
+}

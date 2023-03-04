@@ -38,10 +38,18 @@ const ClassList = () => {
       title: '操作',
       dataIndex: 'actions',
       width: 160,
-      render(value, record, index) {
+      render(_value, record) {
         return (
           <div className="list-wrap-column-actions">
-            <Button size="small">编辑</Button>
+            <Button
+              size="small"
+              onClick={() => {
+                setVisible(true)
+                setEditClassItem(record)
+              }}
+            >
+              编辑
+            </Button>
             <Popconfirm
               placement="bottomRight"
               title="确定删除该课程吗？"
@@ -70,15 +78,18 @@ const ClassList = () => {
     <div className="list-wrap">
       <header>
         <Input style={{ width: 200 }} placeholder="请输入查询名称!" />
-        <Button type="primary">添加课程</Button>
+        <Button type="primary" onClick={() => setVisible(true)}>
+          添加课程
+        </Button>
       </header>
       <main className="list-wrap-content">
         <Table rowKey="id" columns={columns} dataSource={data} />
       </main>
       <Modal
         centered
+        destroyOnClose
         title={!!editClassItem ? '编辑课程' : '创建课程'}
-        open={true || visible}
+        open={visible}
         footer={null}
         onCancel={closeModal}
       >

@@ -5,6 +5,8 @@ import Slider from '@/Components/Layout/Slider'
 import Categories from '@/Components/Categories'
 import PostsNav from '@/Components/PostsNav'
 import Classes from '@/views/Classes'
+import Login from '@/views/Login'
+import Forbidden from '@/views/Forbidden'
 import { ConfigProvider } from 'antd'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
@@ -89,6 +91,8 @@ function App() {
           <Route path="admin" element={<AdminLayout />}>
             <Route path="classes" element={<Classes />} />
           </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/forbidden" element={<Forbidden />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </ConfigProvider>

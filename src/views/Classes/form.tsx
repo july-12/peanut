@@ -20,7 +20,7 @@ const ClassForm = (props: IProps) => {
     <Form
       {...layout}
       style={{ marginTop: 30 }}
-      initialValues={{ course: { title: 'xxx', desc: 'fda' } }}
+      initialValues={{ course: { title: props.data?.title, desc: props.data?.desc } }}
       onFinish={onFinish}
     >
       <Form.Item
