@@ -10,8 +10,8 @@ const HomePage = () => {
   const loaderData = async () => {
     const token = getToken()
     if(token) {
-        const res: any = await request.get('/api/user_info')
-        console.log(res)
+        // const res: any = await request.get('/api/user_info')
+        // console.log(res)
     }
   }
   useEffect(() => {
