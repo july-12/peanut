@@ -8,6 +8,8 @@ import BasicLayout from './Components/Layout/Basic'
 import AdminLayout from './Components/Layout/Admin'
 import Categories from '@/Components/Categories'
 import PostsNav from '@/Components/PostsNav'
+import Post from '@/pages/Posts/Post'
+import PostCreate from '@/pages/Posts/Create'
 import HomePage from '@/pages/HomePage'
 import Classes from '@/pages/Classes'
 import Login from '@/pages/Login'
@@ -28,14 +30,6 @@ const ClassIndex = () => {
 const PostIndex = () => {
   return <div>Post Index</div>
 }
-const PostContent = () => {
-  return <div>PostContent</div>
-}
-
-const PostCreate = () => {
-  return <div>PostCreate</div>
-}
-
 const ClassLayout = () => {
   return (
     <Layout direction="vertical">
@@ -66,7 +60,7 @@ const Router = () => {
               <Route path="posts">
                 <Route index element={<PostIndex />} />
                 <Route path="new" element={<PostCreate />} />
-                <Route path=":id" element={<PostContent />}></Route>
+                <Route path=":id" element={<Post />}></Route>
               </Route>
             </Route>
           </Route>

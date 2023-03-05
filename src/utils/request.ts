@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { baseURL } from '@/api'
+import { baseURL } from '@/api/common'
 import { getToken } from '@/utils/token'
 // export const BASE_URL = ''
 

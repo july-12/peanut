@@ -23,17 +23,17 @@ export const classes = createModel<RootModel>()({
   },
   effects: (dispatch) => ({
     async getClasses() {
-        const res = await api.getClassList<IClass[]>()
+        const res = await api.classes.list<IClass[]>()
         dispatch.class.update({ list: res })
     },
     async createClass(value: Omit<IClass, 'id'>) {
-        await api.createClass<Omit<IClass, 'id'>>(value)
+        await api.classes.create<Omit<IClass, 'id'>>(value)
     },
     async updateClass(value: IClass) {
-        await api.updateClass<IClass>(value.id, value)
+        await api.classes.update<IClass>(value.id, value)
     },
     async deleteClass(id: number) {
-        const res = await api.deleteClass(id)
+        await api.classes.remove(id)
     },
   }),
 });

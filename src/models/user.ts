@@ -1,6 +1,6 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from ".";
-import * as api from '@/api'
+import * as api from '@/api/common'
 
 export interface IUser {
     id: number
