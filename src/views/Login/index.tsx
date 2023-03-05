@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Input, Button, Alert } from 'antd'
+import { Form, Input, Button, Alert, Divider } from 'antd'
 import request from '@/utils/request'
 import { setToken } from '@/utils/token'
+import { getGitHubAuthorizeUrl } from '@/utils/githubAuthURL'
 import { useNavigate } from 'react-router-dom'
 
 import './index.scss'
@@ -19,6 +20,7 @@ const Login = () => {
       setNoMatch(true)
     }
   }
+
   return (
     <div className="login-wrap">
       <div className="login-wrap-area">
@@ -55,6 +57,11 @@ const Login = () => {
             </Button>
           </Form.Item>
         </Form>
+        <div className="oauth-area">
+          <Divider>
+            <a href={getGitHubAuthorizeUrl()}>github</a>
+          </Divider>
+        </div>
       </div>
     </div>
   )

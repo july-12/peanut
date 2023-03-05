@@ -4,8 +4,10 @@ import Content from '@/Components/Layout/Content'
 import Slider from '@/Components/Layout/Slider'
 import Categories from '@/Components/Categories'
 import PostsNav from '@/Components/PostsNav'
+import HomePage from '@/views/HomePage'
 import Classes from '@/views/Classes'
 import Login from '@/views/Login'
+import AuthGithubCallbackLanding from '@/views/Login/AuthGithubCallbackLanding'
 import Forbidden from '@/views/Forbidden'
 import { ConfigProvider } from 'antd'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
@@ -76,7 +78,7 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<div>homepage</div>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/class" element={<ClassLayout />}>
             <Route index element={<ClassIndex />} />
             <Route path=":classId">
@@ -88,10 +90,11 @@ function App() {
               </Route>
             </Route>
           </Route>
-          <Route path="admin" element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminLayout />}>
             <Route path="classes" element={<Classes />} />
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/auth/github/callback" element={<AuthGithubCallbackLanding />} />
           <Route path="/forbidden" element={<Forbidden />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
