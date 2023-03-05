@@ -1,12 +1,11 @@
-import React from 'react'
-
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import Layout from '@/Components/Layout/index'
-import BasicLayout from './Components/Layout/Basic'
 import Header from '@/Components/Layout/Header'
 import Content from '@/Components/Layout/Content'
 import Slider from '@/Components/Layout/Slider'
+import BasicLayout from './Components/Layout/Basic'
+import AdminLayout from './Components/Layout/Admin'
 import Categories from '@/Components/Categories'
 import PostsNav from '@/Components/PostsNav'
 import HomePage from '@/pages/HomePage'
@@ -54,19 +53,6 @@ const ClassLayout = () => {
   )
 }
 
-const AdminLayout = () => {
-  return (
-    <Layout direction="vertical">
-      <Header />
-      <Content>
-        <Slider>Slider</Slider>
-        <main className="layout-content-container">
-          <Outlet />
-        </main>
-      </Content>
-    </Layout>
-  )
-}
 const Router = () => {
   return (
     <BrowserRouter>

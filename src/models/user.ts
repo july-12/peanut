@@ -13,22 +13,24 @@ export interface IUser {
 }
 
 interface IUserState {
-    currentUser?: IUser | null
+    fetched: boolean;
+    currentUser?: IUser
 }
 
 export const user = createModel<RootModel>()({
   state: {
-    currentUser: null
+    fetched: false,
+    currentUser: undefined
   } as IUserState,
   reducers: {
-    update(state, payload: IUserState) {
+    update(state, payload: Partial<IUserState>) {
       return { ...state, ...payload};
     },
   },
   effects: (dispatch) => ({
     async getUserInfo() {
         const res = await api.getUserInfo<IUser>()
-        dispatch.user.update({ currentUser: res })
+        dispatch.user.update({ currentUser: res, fetched: true })
     },
     // handle state changes with impure functions.
     // use async/await for async actions

@@ -7,9 +7,7 @@ import { store } from '@/store'
 const BasicLayout = () => {
   // 获取当前用户信息
   const getUserInfo = useCallback(() => {
-    if (getToken()) {
-      store.dispatch.user.getUserInfo()
-    }
+    store.dispatch.user.getUserInfo()
   }, [])
 
   useEffect(() => {

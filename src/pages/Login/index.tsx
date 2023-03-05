@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Form, Input, Button, Alert, Divider } from 'antd'
-import request from '@/utils/request'
+import * as api from '@/api'
 import { setToken } from '@/utils/token'
 import { getGitHubAuthorizeUrl } from '@/utils/githubAuthURL'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +12,7 @@ const Login = () => {
   const [noMatch, setNoMatch] = useState(false)
 
   const onFinish = async (value: any) => {
-    const res: any = await request.post('/api/users/login', value)
+    const res: any = await api.login(value)
     if (res?.token) {
       setToken(res.token)
       navigate('/')
