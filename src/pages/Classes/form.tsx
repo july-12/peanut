@@ -14,7 +14,7 @@ interface IProps {
 
 const ClassForm = (props: IProps) => {
   const onFinish = (value: any) => {
-    console.log(value)
+    props.onSibmit(value)
   }
   return (
     <Form

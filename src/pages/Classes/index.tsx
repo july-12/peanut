@@ -1,30 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useStore, Dispatch } from '@/store'
+import { IClass } from '@/models/class'
+import { useDispatch } from 'react-redux'
 import { Input, Button, Table, Popconfirm, Modal } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import ClassForm from './form'
 
-interface DataType {
-  id: React.Key
-  title: string
-  desc: string
-}
+interface DataType extends IClass {}
 
 const ClassList = () => {
   const [visible, setVisible] = useState(false)
-  const confirmDelete = () => {}
   const [editClassItem, setEditClassItem] = useState<any>()
-  const data = [
-    {
-      id: 1,
-      title: 'title1',
-      desc: 'desc'
-    },
-    {
-      id: 2,
-      title: 'title2',
-      desc: 'desc2'
-    }
-  ]
+  const store = useStore('class')
+  const dispatch = useDispatch<Dispatch>()
+
+  const getClassList = () => {
+    dispatch.class.getClasses()
+  }
+
+  const data: DataType[] = store.class.list
+
+  useEffect(() => {
+    getClassList()
+  }, [])
+
+  const confirmDelete = (id: number) => {
+    dispatch.class.deleteClass(id)
+  }
+
   const columns: ColumnsType<DataType> = [
     {
       title: '课程名称',
@@ -54,7 +57,7 @@ const ClassList = () => {
               placement="bottomRight"
               title="确定删除该课程吗？"
               description="删除课程"
-              onConfirm={confirmDelete}
+              onConfirm={() => confirmDelete(record.id)}
             >
               <Button size="small" type="primary" danger ghost>
                 删除
@@ -71,7 +74,12 @@ const ClassList = () => {
   }
 
   const handleSubmit = (value: any) => {
-    console.log(value)
+    if (editClassItem) {
+      dispatch.class.updateClass({ ...value, id: editClassItem.id })
+    } else {
+      dispatch.class.createClass(value)
+    }
+    getClassList()
     closeModal()
   }
   return (

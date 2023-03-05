@@ -16,19 +16,19 @@ interface IProps {
 }
 const AdminLayout = ({ fetched, currentUser }: IProps) => {
   const navigate = useNavigate()
+  const authorized = fetched && currentUser
   useEffect(() => {
     if (fetched && !currentUser) {
       navigate('/forbidden')
     }
   }, [fetched, currentUser])
+
   return (
     <Layout direction="vertical">
       <Header />
       <Content>
         <Slider>Slider</Slider>
-        <main className="layout-content-container">
-          <Outlet />
-        </main>
+        <main className="layout-content-container">{authorized && <Outlet />}</main>
       </Content>
     </Layout>
   )
