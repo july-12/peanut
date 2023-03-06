@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import request from '@/utils/request'
 import { setToken } from '@/utils/token'
+import { github_authorize } from '@/api'
 import { useNavigate } from 'react-router-dom'
 import './auth-github.scss'
 
@@ -12,9 +12,7 @@ const AUthGithubCallbackLanding = () => {
   const authorizing = useCallback(async () => {
     if (code) {
       try {
-        const res: any = await request.get('/api/auth/github/callback', {
-          params: { code }
-        })
+        const res: any = await github_authorize(code)
         if (res?.token) {
           setToken(res.token)
           navigate('/')
