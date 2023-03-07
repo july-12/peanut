@@ -24,8 +24,8 @@ export const post = createModel<RootModel>()({
     }
   },
   effects: (dispatch) => ({
-    async getPosts() {
-      const res = await api.posts.list<IPost[]>()
+    async getPosts(params) {
+      const res = await api.posts.list<IPost[]>(params)
       dispatch.post.update({ list: res })
     },
     async getPost(id: string | number) {

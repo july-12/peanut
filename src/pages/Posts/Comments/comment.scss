@@ -1,0 +1,11 @@
+.comment-box {
+  display: flex;
+  gap: 10px;
+
+  .avatar {
+    height: fit-content;
+  }
+  .right-area {
+    flex: 1;
+  }
+}

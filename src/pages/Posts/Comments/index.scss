@@ -1,0 +1,29 @@
+$bg: rgba(127, 127, 127, 0.1);
+
+.comments-list {
+  margin: 16px;
+  border-radius: 4px;
+  background-color: #fff;
+
+  & > header {
+    padding: 10px 16px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  & > main {
+    padding: 0 16px;
+    .comment-item {
+      background: $bg;
+      min-height: 100px;
+      padding: 10px;
+      border-bottom: 1px solid rgba(127, 127, 127, 0.1);
+      &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  }
+  & > footer {
+    padding: 16px;
+  }
+}

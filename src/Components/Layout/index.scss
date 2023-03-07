@@ -14,9 +14,11 @@ $header-bg: #3e7aab;
   }
   &-content {
     flex: 1;
+    overflow: hidden;
     display: flex;
     &-container {
       flex: 1;
+      overflow: scroll;
       background-color: #eaeef4;
     }
   }

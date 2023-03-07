@@ -1,0 +1,13 @@
+.avatar {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  &-rect {
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+  }
+  &-circle {
+    border-radius: 50%;
+  }
+}

@@ -14,11 +14,16 @@ body,
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  
 }
 
 .list-wrap .list-wrap-column-actions {
   display: flex;
   gap: 10px;
+}
 
+.main-content-area {
+  margin: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #fff;
 }
