@@ -9,11 +9,9 @@ import { ICommentFormValue } from '@/models/comments'
 import './index.scss'
 import './comment.scss'
 
-const TIME_FORMAT = 'YYYY-MM-DD'
-
 const Comments = () => {
   const {
-    comment: { list: comments, currentPostId }
+    comment: { list: comments }
   } = useStore(['post', 'comment'])
 
   const dispatch = useDispatch<Dispatch>()
@@ -25,7 +23,7 @@ const Comments = () => {
   return (
     <div className="comments-list">
       <header>
-        followup discussions, <span>for lingering questions and comments</span>
+        <span>共 {comments.length} 条评论 </span>
       </header>
       <main>
         {map(comments, (comment) => (

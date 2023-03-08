@@ -39,7 +39,7 @@ export const post = createModel<RootModel>()({
       dispatch.comment.update({ list: res.comments, currentPostId: +id })
     },
     async createPost(value: Omit<IPost, 'id'>) {
-      await api.posts.create<Omit<IPost, 'id'>>(value)
+      return await api.posts.create<Omit<IPost, 'id'>>(value)
     },
     async updatePost(value: IPost) {
       await api.posts.update<IPost>(value.id, value)

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
+import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
 import { useStore, Dispatch } from '@/store'
 import { useDispatch } from 'react-redux'
 import CommentList from './Comments'
-import CommentForm from './Comments/Form'
 
 import './post.scss'
 
@@ -31,18 +31,17 @@ const Post = () => {
   return (
     <div className="post-wrap">
       <div className="post-content main-content-area">
-        <h2>{post?.title}</h2>
-        {post?.content && <div dangerouslySetInnerHTML={{ __html: post.content }}></div>}
+        <h1>{post?.title}</h1>
+        <div className="post-detail">
+          <span>{post?.creator.name}</span>
+          <span>{dayjs(post?.created_at).fromNow()} 创建</span>
+        </div>
+        <div className="post-text">
+          {post?.content && <div dangerouslySetInnerHTML={{ __html: post.content }}></div>}
+        </div>
       </div>
 
-      <CommentList postId={params.id} />
-      {/* <div className="main-content-area">
-        <h3>共 {comments.length} 条评论 </h3>
-        <CommentList postId={params.id} />
-      </div> */}
-      {/* <div className="create-new-comment">
-        <CommentForm onSubmit={handleCommentSubmit} />
-      </div> */}
+      <CommentList />
     </div>
   )
 }

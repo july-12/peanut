@@ -1,6 +1,7 @@
 import React from 'react'
 import clns from 'classnames'
 import { Collapse, Button, Input } from 'antd'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import './index.scss'
 
@@ -26,6 +27,8 @@ const Post = (props: IPostProps) => {
   )
 }
 const PostsNav = () => {
+  const navigate = useNavigate()
+  const params = useParams()
   const data = [
     {
       id: '1',
@@ -70,7 +73,9 @@ const PostsNav = () => {
   return (
     <div className="posts">
       <header>
-        <Button type='primary'>new Post</Button>
+        <Button type="primary" onClick={() => navigate(`/class/${params.classId}/posts/new`)}>
+          new Post
+        </Button>
         <Input placeholder="请输入查询字段" prefix={<span>i</span>} />
       </header>
       <div className="tags"></div>
