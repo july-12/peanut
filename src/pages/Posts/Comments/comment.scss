@@ -2,10 +2,22 @@
   display: flex;
   gap: 10px;
 
-  .avatar {
-    height: fit-content;
-  }
+  // .avatar {
+  //   height: fit-content;
+  // }
   .right-area {
     flex: 1;
+    header {
+      font-size: 14px;
+      font-weight: bold;
+      & > span {
+        margin-left: 10px;
+        color: #999;
+        font-size: 12px;
+      }
+    }
+    main {
+      padding: 10px 0;
+    }
   }
 }

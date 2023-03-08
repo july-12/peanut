@@ -1,6 +1,12 @@
 import { Provider } from 'react-redux'
+import dayjs  from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/zh-cn'
 import { ConfigProvider } from 'antd'
 import Router from './Router'
+
+dayjs.extend(relativeTime)
+dayjs.locale('zh-cn')
 
 import { store } from './store'
 
