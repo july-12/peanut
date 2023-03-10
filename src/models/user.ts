@@ -1,19 +1,20 @@
-import { createModel } from "@rematch/core";
-import { RootModel } from ".";
+import { createModel } from '@rematch/core'
+import { RootModel } from '.'
 import * as api from '@/api/common'
+import { removeToken } from '@/utils/token'
 
 export interface IUser {
-    id: number
-    name: string
-    email: string
-    phone: string
-    avatar: string
-    bio: string
+  id: number
+  name: string
+  email: string
+  phone: string
+  avatar: string
+  bio: string
 }
 
 interface IUserState {
-    fetched: boolean;
-    currentUser?: IUser
+  fetched: boolean
+  currentUser?: IUser
 }
 
 export const user = createModel<RootModel>()({
@@ -23,13 +24,17 @@ export const user = createModel<RootModel>()({
   } as IUserState,
   reducers: {
     update(state, payload: Partial<IUserState>) {
-      return { ...state, ...payload};
-    },
+      return { ...state, ...payload }
+    }
   },
   effects: (dispatch) => ({
     async getUserInfo() {
-        const res = await api.getUserInfo<IUser>()
-        dispatch.user.update({ currentUser: res, fetched: true })
+      const res = await api.getUserInfo<IUser>()
+      dispatch.user.update({ currentUser: res, fetched: true })
     },
-  }),
-});
+    logout() {
+      removeToken()
+      dispatch.user.update({ currentUser: undefined })
+    }
+  })
+})

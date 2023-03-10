@@ -21,7 +21,7 @@ const ClassLayout = () => {
 
   return (
     <Layout direction="vertical">
-      <Header />
+      <Header className="layout-header-class" />
       <Categories />
       <Content>
         <Slider>

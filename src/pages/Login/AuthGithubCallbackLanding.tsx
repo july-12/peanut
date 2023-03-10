@@ -15,7 +15,8 @@ const AUthGithubCallbackLanding = () => {
         const res: any = await github_authorize(code)
         if (res?.token) {
           setToken(res.token)
-          navigate('/')
+          const from = localStorage.getItem('loginFrom')
+          navigate(from || '/')
         }
       } catch (err) {
         navigate('/login')

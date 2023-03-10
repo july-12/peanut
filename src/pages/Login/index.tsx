@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Form, Input, Button, Alert, Divider } from 'antd'
 import * as api from '@/api/common'
 import { setToken } from '@/utils/token'
 import { getGitHubAuthorizeUrl } from '@/utils/githubAuthURL'
 import { useNavigate } from 'react-router-dom'
+import Icon from '@/Components/Icon'
 
 import './index.scss'
 
 const Login = () => {
   const navigate = useNavigate()
   const [noMatch, setNoMatch] = useState(false)
+  const [query] = useSearchParams()
 
   const onFinish = async (value: any) => {
     const res: any = await api.login(value)
@@ -20,6 +23,7 @@ const Login = () => {
       setNoMatch(true)
     }
   }
+  location
 
   return (
     <div className="login-wrap">
@@ -53,13 +57,24 @@ const Login = () => {
 
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              登录
+              确定
             </Button>
           </Form.Item>
         </Form>
         <div className="oauth-area">
           <Divider>
-            <a href={getGitHubAuthorizeUrl()}>github</a>
+            <span
+              className="auth-provider"
+              onClick={() => {
+                localStorage.setItem('loginFrom', query.get('from') || '/')
+                window.location.assign(getGitHubAuthorizeUrl())
+              }}
+            >
+              <span className="icon-image">
+                <Icon symbol="icon-github-fill" />
+              </span>
+              <span className="icon-text">Github</span>
+            </span>
           </Divider>
         </div>
       </div>

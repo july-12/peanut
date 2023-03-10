@@ -1,5 +1,4 @@
-$color: red;
-$header-height: 45px;
+$header-height: 52px;
 $header-bg: #3e7aab;
 
 .layout {
@@ -24,5 +23,27 @@ $header-bg: #3e7aab;
   }
   &-slider {
     width: 300px;
+  }
+}
+
+.layout-header-class {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  #logo {
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .extra {
+    color: #eaeaea;
+    .user-info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
   }
 }
