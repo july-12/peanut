@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import dayjs from 'dayjs'
+import { map } from 'lodash'
+import { Tag } from 'antd'
 import { useParams } from 'react-router-dom'
 import { useStore, Dispatch } from '@/store'
 import { useDispatch } from 'react-redux'
@@ -12,8 +14,8 @@ const Post = () => {
 
   const {
     post: { post },
-    comment: { list: comments }
-  } = useStore(['post', 'comment'])
+    tag: { postList: tags }
+  } = useStore(['post', 'tag'])
 
   const dispatch = useDispatch<Dispatch>()
 
@@ -23,10 +25,17 @@ const Post = () => {
     }
   }, [params.id])
 
-  // const handleCommentSubmit = (value: any) => {
-  //   value.comment.post_id = params.id
-  //   dispatch.comment.createComment(value)
-  // }
+  const renderTags = () => {
+    return (
+      <div className="post-tags">
+        {map(tags, (tag) => (
+          <Tag color={tag.color} key={tag.id}>
+            {tag.name}
+          </Tag>
+        ))}
+      </div>
+    )
+  }
 
   return (
     <div className="post-wrap">
@@ -38,6 +47,7 @@ const Post = () => {
         </div>
         <div className="post-text">
           {post?.content && <div dangerouslySetInnerHTML={{ __html: post.content }}></div>}
+          {renderTags()}
         </div>
       </div>
 

@@ -25,6 +25,9 @@
     padding: 16px;
   }
   .replies {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     .reply-item {
       padding: 10px 6px;
       background-color: #eeeeee;

@@ -15,7 +15,6 @@ export interface IComment {
 interface ICommentstate {
   list: IComment[]
   total: number
-  currentPostId?: number
   comment?: IComment
 }
 
@@ -29,7 +28,6 @@ export const comment = createModel<RootModel>()({
   state: {
     list: [],
     total: 0,
-    currentPostId: undefined,
     comment: undefined
   } as ICommentstate,
   reducers: {

@@ -1,13 +1,8 @@
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Layout from '@/Components/Layout/index'
-import Header from '@/Components/Layout/Header'
-import Content from '@/Components/Layout/Content'
-import Slider from '@/Components/Layout/Slider'
 import BasicLayout from './Components/Layout/Basic'
 import AdminLayout from './Components/Layout/Admin'
-import Categories from '@/Components/Categories'
-import PostsNav from '@/Components/PostsNav'
+import ClassLayout from './Components/Layout/ClassLayout'
 import Post from '@/pages/Posts/Post'
 import PostCreate from '@/pages/Posts/Create'
 import HomePage from '@/pages/HomePage'
@@ -29,22 +24,6 @@ const ClassIndex = () => {
 
 const PostIndex = () => {
   return <div>Post Index</div>
-}
-const ClassLayout = () => {
-  return (
-    <Layout direction="vertical">
-      <Header />
-      <Categories />
-      <Content>
-        <Slider>
-          <PostsNav />
-        </Slider>
-        <main className="layout-content-container">
-          <Outlet />
-        </main>
-      </Content>
-    </Layout>
-  )
 }
 
 const Router = () => {

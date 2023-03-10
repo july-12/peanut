@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useStore } from '@/store'
 import { Form, Input, Button } from 'antd'
 import Avatar from '@/Components/Avatar'
@@ -13,20 +13,31 @@ interface IProps {
 }
 const CommentForm = (props: Partial<IProps>) => {
   const [focusing, setFocusing] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
   const {
     user: { currentUser }
   } = useStore(['user'])
 
   const onFinish = (value: any) => {
     props.onSubmit?.(value)
+    setFocusing(false)
   }
 
   const handleFocus = () => {
     setFocusing(true)
   }
+
   const handleCancel = () => {
     setFocusing(false)
   }
+
+  useEffect(() => {
+    if(focusing) {
+      textareaRef.current?.focus()
+    }
+
+  }, [focusing])
 
   if (!focusing) {
     return <Input placeholder="回复评论" onFocus={handleFocus} />
@@ -44,7 +55,7 @@ const CommentForm = (props: Partial<IProps>) => {
           name='content'
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.TextArea rows={6} placeholder="请输入内容" />
+          <Input.TextArea ref={textareaRef} rows={6} placeholder="请输入内容" />
         </Form.Item>
         <Form.Item>
           <Button style={{ width: 100 }} type="primary" htmlType="submit">

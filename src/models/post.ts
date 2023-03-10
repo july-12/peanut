@@ -1,7 +1,8 @@
 import { createModel } from '@rematch/core'
 import { RootModel } from '.'
 import * as api from '@/api'
-import {IComment } from './comments'
+import { IComment } from './comments'
+import { ITag } from './tag'
 import { IUser } from './user'
 
 export interface IPost {
@@ -34,9 +35,10 @@ export const post = createModel<RootModel>()({
       dispatch.post.update({ list: res })
     },
     async getPost(id: string | number) {
-      const res = await api.posts.get<IPost & { comments: IComment[]}>(id)
+      const res = await api.posts.get<IPost & { comments: IComment[]; tags: ITag[] }>(id)
       dispatch.post.update({ post: res })
-      dispatch.comment.update({ list: res.comments, currentPostId: +id })
+      dispatch.comment.update({ list: res.comments })
+      dispatch.tag.update({ postList: res.tags })
     },
     async createPost(value: Omit<IPost, 'id'>) {
       return await api.posts.create<Omit<IPost, 'id'>>(value)

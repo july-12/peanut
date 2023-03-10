@@ -1,6 +1,6 @@
 import React from 'react'
-import { Form, Input, Button, Select } from 'antd'
-import type { SelectProps } from 'antd'
+import { Form, Input, Button } from 'antd'
+import TagsSelector from '@/Components/TagsSelector'
 
 interface IProps {
   data: any
@@ -9,10 +9,10 @@ interface IProps {
 }
 
 const PostForm = (props: Partial<IProps>) => {
-  const onFinish = (value: any) => {
+  const onFinish = async (value: any) => {
     props.onSubmit?.(value)
   }
-  const options: SelectProps['options'] = []
+
   return (
     <Form
       labelCol={{ span: 4 }}
@@ -24,19 +24,19 @@ const PostForm = (props: Partial<IProps>) => {
       <Form.Item
         label="标题"
         name={['post', 'title']}
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ required: true, message: '请输入标题' }]}
       >
         <Input placeholder="请输入标题" />
       </Form.Item>
 
       <Form.Item label="标签" name={['post', 'tags']}>
-        <Select mode="tags" style={{ width: '100%' }} placeholder="请选择标签" options={options} />
+        <TagsSelector />
       </Form.Item>
 
       <Form.Item
         label="内容"
         name={['post', 'content']}
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[{ required: true, message: '请输入内容' }]}
       >
         <Input.TextArea rows={10} placeholder="请输入内容" />
       </Form.Item>
