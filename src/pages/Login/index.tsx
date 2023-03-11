@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Form, Input, Button, Alert, Divider } from 'antd'
 import * as api from '@/api/common'
-import { setToken } from '@/utils/token'
+import { getToken, setToken } from '@/utils/token'
 import { getGitHubAuthorizeUrl } from '@/utils/githubAuthURL'
 import { useNavigate } from 'react-router-dom'
 import Icon from '@/Components/Icon'
+import { useStore, useDispatch } from '@/store'
 
 import './index.scss'
 
@@ -13,6 +14,27 @@ const Login = () => {
   const navigate = useNavigate()
   const [noMatch, setNoMatch] = useState(false)
   const [query] = useSearchParams()
+
+  const {
+    user: { currentUser, fetched }
+  } = useStore('user')
+
+  const hasLogined = useCallback(async () => {
+    const redirect = () => navigate(query.get('from') || '/')
+    if (fetched && currentUser) {
+      redirect()
+    } else if (getToken()) {
+      const res = await api.getUserInfo()
+      console.log(res)
+      if (!!res) {
+        redirect()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    hasLogined()
+  }, [hasLogined])
 
   const onFinish = async (value: any) => {
     const res: any = await api.login(value)

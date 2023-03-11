@@ -16,11 +16,11 @@ const CreatePost = () => {
   } = useStore('user')
 
   useEffect(() => {
-    console.log(currentUser)
     if (fetched && !currentUser) {
       navigate(`/login?from=${location.pathname}`)
     }
   }, [fetched, currentUser])
+
   const handleSubmit = async (value: any) => {
     value.post.course_id = params.classId
     const res = await dispatch.post.createPost(value)
