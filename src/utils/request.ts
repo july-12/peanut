@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { baseURL } from '@/api/common'
 import { getToken } from '@/utils/token'
-// export const BASE_URL = ''
+
+export const BASE_URL = import.meta.env.PROD ? import.meta.env.VITE_SERVER_DOMAIN : ''
 
 const instance = axios.create({
-  //   baseURL: BASE_URL,
+  baseURL: BASE_URL,
 })
+
 
 instance.interceptors.response.use(
   function (response) {

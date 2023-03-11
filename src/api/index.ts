@@ -1,5 +1,6 @@
 import request from '@/utils/request'
-import { createRestfulApi, baseURL } from './utils'
+import { createRestfulApi } from './utils'
+import { baseURL } from './common'
 
 export * from './common'
 export const classes = createRestfulApi('classes')

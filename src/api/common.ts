@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export const baseURL = '/api'
+export const baseURL = import.meta.env.PROD ? '' : '/api'
 
 export function login(value: { name: string; password: string }) {
   return request.post<{ token: string }>(`${baseURL}/users/login`, value).then((res) => res.data)

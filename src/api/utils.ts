@@ -1,8 +1,7 @@
 import request from '@/utils/request'
+import { baseURL } from './common'
 
 type TDynamiclyResource<T> = (params: T) => string
-
-export const baseURL = '/api'
 
 export function createRestfulApi(resource: string) {
   return {
