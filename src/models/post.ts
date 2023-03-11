@@ -30,11 +30,13 @@ export const post = createModel<RootModel>()({
     }
   },
   effects: (dispatch) => ({
-    async getPosts(params) {
+    async getPosts(params, state) {
+      const newParams = Object.assign({}, params, { tags: state.tag.selectedQueryTags })
+      console.log(newParams)
       const res = await api.posts.list<IPost[]>(params)
       dispatch.post.update({ list: res })
     },
-    async getPost(id: string | number) {
+    async getPost(id: string | number, state) {
       const res = await api.posts.get<IPost & { comments: IComment[]; tags: ITag[] }>(id)
       dispatch.post.update({ post: res })
       dispatch.comment.update({ list: res.comments })

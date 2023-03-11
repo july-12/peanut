@@ -17,15 +17,18 @@ export interface ITagValue {
   course_id: string
 }
 
+type TTagList = (ITag & { posts: IPost[] })[]
+
 interface ITagState {
-  list: (ITag & { posts: IPost[] })[]
-  postList: ITag[]
+  list: TTagList  // 所有标签
+  postList: ITag[] // 当前帖子的标签
+  selectedQueryTags?: number[] // 选择的标签分类查询
 }
 
 export const tag = createModel<RootModel>()({
   state: {
     list: [],
-    postList: []
+    postList: [],
   } as ITagState,
   reducers: {
     update(state, payload: Partial<ITagState>) {
@@ -34,7 +37,7 @@ export const tag = createModel<RootModel>()({
   },
   effects: (dispatch) => ({
     async getTags(params: any) {
-      const res = await api.tags.list<ITag[]>(params)
+      const res = await api.tags.list<TTagList>(params)
       dispatch.tag.update({ list: res })
     },
     async createTag(value: ITagValue) {

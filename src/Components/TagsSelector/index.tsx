@@ -36,7 +36,6 @@ const ColorPicker = (props: Partial<IColorPickerProps>) => {
   //   )
 }
 const TagsSelector = (props: Partial<ITagProps>) => {
-  console.log(props)
   const selectedTags = props.value || []
   const [open, setOpen] = useState(false)
   const { token } = theme.useToken()
@@ -55,13 +54,11 @@ const TagsSelector = (props: Partial<ITagProps>) => {
   }
 
   const handleChange = (tag: number) => {
-    console.log(tag)
     const checked = selectedTags.some((id) => id === tag)
     const nextSelectedTags = !checked
       ? [...selectedTags, tag]
       : selectedTags.filter((t) => t !== tag)
 
-    console.log('You are interested in: ', nextSelectedTags)
     props.onChange?.(nextSelectedTags)
   }
 
@@ -85,25 +82,27 @@ const TagsSelector = (props: Partial<ITagProps>) => {
 
   return (
     <div className="tags-selector">
-      <div className="tag-item">
-        <Tag style={tagPlusStyle} onClick={openTagModal}>
-          +添加标签
-        </Tag>
-      </div>
       {map(tags, (tag) => (
         <div
           key={tag.id}
           className={clns('tag-item', { 'tag-item-select': selectedTags.includes(tag.id) })}
           onClick={() => handleChange(tag.id)}
         >
-          <Tag color={tag.color}>{tag.name}</Tag>
+          <Tag className="ant-tag-custom" color={tag.color}>
+            {tag.name}
+          </Tag>
           {selectedTags.includes(tag.id) && (
-            <span className="select-icon">
+            <span className="selected-tag-icon">
               <Icon symbol="icon-check" />
             </span>
           )}
         </div>
       ))}
+      <div className="tag-item">
+        <Tag className="ant-tag-custom" style={tagPlusStyle} onClick={openTagModal}>
+          +添加标签
+        </Tag>
+      </div>
       <Modal title="创建标签" open={open} footer={null} onCancel={closeTagModal}>
         <Form
           labelCol={{ span: 4 }}

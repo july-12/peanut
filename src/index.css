@@ -29,8 +29,26 @@ body,
 }
 
 .icon {
-  width: 1em; height: 1em;
+  width: 1em;
+  height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+.selected-tag-icon {
+  position: absolute;
+  z-index: 100;
+  top: -6px;
+  right: 0;
+  transform: translateX(50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #49d249;
+  font-size: 12px;
 }
