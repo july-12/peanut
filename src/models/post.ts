@@ -14,14 +14,17 @@ export interface IPost {
   creator: IUser
 }
 
+type TWeeklyList = Record<string, IPost[]>
 interface IPostState {
   list: IPost[]
+  weeklyList: TWeeklyList
   post?: IPost
 }
 
 export const post = createModel<RootModel>()({
   state: {
     list: [],
+    weeklyList: {},
     post: undefined
   } as IPostState,
   reducers: {
@@ -30,11 +33,11 @@ export const post = createModel<RootModel>()({
     }
   },
   effects: (dispatch) => ({
-    async getPosts(params, state) {
+    async getPostsByWeekly(params, state): Promise<TWeeklyList> {
       const newParams = Object.assign({}, params, { tags: state.tag.selectedQueryTags })
-      console.log(newParams)
-      const res = await api.posts.list<IPost[]>(params)
-      dispatch.post.update({ list: res })
+      const res = await api.postsExtra.listByWeekly<TWeeklyList>(newParams)
+      dispatch.post.update({ weeklyList: res })
+      return res
     },
     async getPost(id: string | number, state) {
       const res = await api.posts.get<IPost & { comments: IComment[]; tags: ITag[] }>(id)
