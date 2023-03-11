@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div className="login-wrap">
       <div className="login-wrap-area">
-        <h2>登录</h2>
+        <header>登录</header>
         {noMatch && (
           <Alert style={{ marginBottom: 12 }} message="账户或密码输入错误!" type="error" showIcon />
         )}
@@ -55,27 +55,28 @@ const Login = () => {
             <Input.Password placeholder="请输入密码" />
           </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
+          <Form.Item wrapperCol={{ span: 24 }}>
+            <Button style={{ width: '100%' }} type="primary" htmlType="submit">
               确定
             </Button>
           </Form.Item>
         </Form>
+        <Divider>
+          <span style={{ fontSize: 12, color: '#aaa' }}>其他平台账号登录</span>
+        </Divider>
         <div className="oauth-area">
-          <Divider>
-            <span
-              className="auth-provider"
-              onClick={() => {
-                localStorage.setItem('loginFrom', query.get('from') || '/')
-                window.location.assign(getGitHubAuthorizeUrl())
-              }}
-            >
-              <span className="icon-image">
-                <Icon symbol="icon-github-fill" />
-              </span>
-              <span className="icon-text">Github</span>
+          <span
+            className="auth-provider"
+            onClick={() => {
+              localStorage.setItem('loginFrom', query.get('from') || '/')
+              window.location.assign(getGitHubAuthorizeUrl())
+            }}
+          >
+            <span className="icon-image">
+              <Icon symbol="icon-github-fill" />
             </span>
-          </Divider>
+            <span className="icon-text">Github</span>
+          </span>
         </div>
       </div>
     </div>

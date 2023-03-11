@@ -1,6 +1,6 @@
-import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Dispatch } from '@/store'
+import React, { useEffect } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Dispatch, useStore } from '@/store'
 import { useDispatch } from 'react-redux'
 import PostForm from './Form'
 
@@ -10,7 +10,17 @@ const CreatePost = () => {
   const dispatch = useDispatch<Dispatch>()
   const params = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
+  const {
+    user: { currentUser, fetched }
+  } = useStore('user')
 
+  useEffect(() => {
+    console.log(currentUser)
+    if (fetched && !currentUser) {
+      navigate(`/login?from=${location.pathname}`)
+    }
+  }, [fetched, currentUser])
   const handleSubmit = async (value: any) => {
     value.post.course_id = params.classId
     const res = await dispatch.post.createPost(value)
