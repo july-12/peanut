@@ -4,6 +4,7 @@ import { keys, isEmpty, debounce, filter } from 'lodash'
 import clns from 'classnames'
 import { Collapse, Button, Input } from 'antd'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import HighlightText from '@/Components/HighlightText'
 import Icon from '@/Components/Icon'
 import { useStore, useDispatch } from '@/store'
 import { IPost } from '@/models/post'
@@ -13,6 +14,7 @@ import './index.scss'
 const Panel = Collapse.Panel
 interface IPostProps {
   data: IPost & Partial<{ status: string }>
+  keyword?: string
   unread?: boolean
   onClick: (id: number) => void
 }
@@ -30,10 +32,14 @@ const Post = (props: IPostProps) => {
         <div className="post-item-title">
           <div className="title-text">
             {/* <span>{data.label}</span> */}
-            <span className="text">{data.title}</span>
+            <span className="text">
+              <HighlightText text={data.title} highlight={props.keyword} />
+            </span>
           </div>
         </div>
-        <div className="summary">{data.content}</div>
+        <div className="summary">
+          <HighlightText text={data.content} highlight={props.keyword} />
+        </div>
       </main>
       <div className="post-item-actions">
         <Icon symbol="icon-Menu" />
@@ -162,6 +168,7 @@ const PostsNav = () => {
               <Post
                 key={post.id}
                 data={post}
+                keyword={keyword}
                 unread={!postViewStatus[post.id]}
                 onClick={handlePostClick}
               />
