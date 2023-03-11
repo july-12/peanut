@@ -5,25 +5,16 @@ import AdminLayout from './Components/Layout/Admin'
 import ClassLayout from './Components/Layout/ClassLayout'
 import Post from '@/pages/Posts/Post'
 import PostCreate from '@/pages/Posts/Create'
+import PostLanding from '@/pages/Posts/Landing'
 import HomePage from '@/pages/HomePage'
 import Classes from '@/pages/Classes'
+import Landing from '@/pages/Classes/Landing'
 import Login from '@/pages/Login'
 import AuthGithubCallbackLanding from '@/pages/Login/AuthGithubCallbackLanding'
 import Forbidden from '@/pages/Forbidden'
 
 const NoMatch = () => {
   return <div>NoMatch</div>
-}
-const ClassContent = () => {
-  return <div>ClassContent</div>
-}
-
-const ClassIndex = () => {
-  return <div>Class Index</div>
-}
-
-const PostIndex = () => {
-  return <div>Post Index</div>
 }
 
 const Router = () => {
@@ -33,11 +24,11 @@ const Router = () => {
         <Route path="/" element={<BasicLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/class" element={<ClassLayout />}>
-            <Route index element={<ClassIndex />} />
+            <Route index element={<div>set classId in url before visit page</div>} />
             <Route path=":classId">
-              <Route index element={<ClassContent />} />
+              <Route index element={<Landing />} />
               <Route path="posts">
-                <Route index element={<PostIndex />} />
+                <Route index element={<PostLanding />} />
                 <Route path="new" element={<PostCreate />} />
                 <Route path=":id" element={<Post />}></Route>
               </Route>

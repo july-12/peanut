@@ -1,23 +1,14 @@
 import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import { getToken } from '@/utils/token'
-import request from '@/utils/request'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
-  const location = useLocation()
-  console.log(location)
+  const navigate = useNavigate()
 
-  const loaderData = async () => {
-    const token = getToken()
-    if(token) {
-        // const res: any = await request.get('/api/user_info')
-        // console.log(res)
-    }
-  }
   useEffect(() => {
-    loaderData()
+    navigate('class')
   }, [])
-  return <div>this is home page</div>
+
+  return null
 }
 
 export default HomePage

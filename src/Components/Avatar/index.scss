@@ -2,6 +2,14 @@
   width: 38px;
   height: 38px;
   border: 1px solid rgba(0, 0, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  &-box {
+    background-color: #b1b489;
+    border: 1px solid #b1b489;
+    color: #fff;
+  }
   &-rect {
     width: 34px;
     height: 34px;

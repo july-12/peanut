@@ -9,6 +9,11 @@ interface IProps extends React.HTMLAttributes<HTMLImageElement> {
 
 const Avatar = (props: Partial<IProps>) => {
   const shape = props.shape || 'circle'
+
+  if (!props.url) {
+    return <div className={`avatar avatar-box avatar-${shape}`}>U</div>
+  }
+
   return <img className={`avatar avatar-${shape}`} src={props.url} />
 }
 

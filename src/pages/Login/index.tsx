@@ -40,7 +40,7 @@ const Login = () => {
     const res: any = await api.login(value)
     if (res?.token) {
       setToken(res.token)
-      navigate('/')
+      navigate(query.get('from') || '/')
     } else {
       setNoMatch(true)
     }

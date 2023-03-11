@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { keys, isEmpty, debounce, filter } from 'lodash'
 import clns from 'classnames'
-import { Collapse, Button, Input } from 'antd'
+import { Collapse, Button, Input, Typography, Empty } from 'antd'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import HighlightText from '@/Components/HighlightText'
 import Icon from '@/Components/Icon'
@@ -12,6 +12,7 @@ import { IPost } from '@/models/post'
 import './index.scss'
 
 const Panel = Collapse.Panel
+const { Paragraph } = Typography
 interface IPostProps {
   data: IPost & Partial<{ status: string }>
   keyword?: string
@@ -37,9 +38,9 @@ const Post = (props: IPostProps) => {
             </span>
           </div>
         </div>
-        <div className="summary">
+        <Paragraph className="summary" ellipsis={{ rows: 2 }}>
           <HighlightText text={data.content} highlight={props.keyword} />
-        </div>
+        </Paragraph>
       </main>
       <div className="post-item-actions">
         <Icon symbol="icon-Menu" />
@@ -72,11 +73,14 @@ const PostsNav = () => {
   } = useStore(['post', 'tag'])
 
   const loadPostByWeekly = useCallback(async () => {
+    if (!params.classId) {
+      return
+    }
     const res = await dispatch.post.getPostsByWeekly({ course_id: params.classId })
     if (isEmpty(activeKeys)) {
       setActiveKeys(keys(res)?.slice(0, 1))
     }
-  }, [selectedQueryTags])
+  }, [params.classId, selectedQueryTags])
 
   useEffect(() => {
     loadPostByWeekly()
@@ -151,31 +155,37 @@ const PostsNav = () => {
       </header>
       <div className="tags"></div>
 
-      <div className="actions"> show Actions</div>
-
-      <Collapse
-        expandIcon={({ isActive }) => (
-          <Icon symbol={isActive ? 'icon-arrow-down-filling' : 'icon-arrow-right-filling'} />
-        )}
-        bordered={false}
-        className="post-collapse"
-        activeKey={activeKeys}
-        onChange={onCollapseChange}
-      >
-        {data.map((dis) => (
-          <Panel header={dis.title} key={dis.id}>
-            {dis.children.map((post) => (
-              <Post
-                key={post.id}
-                data={post}
-                keyword={keyword}
-                unread={!postViewStatus[post.id]}
-                onClick={handlePostClick}
-              />
-            ))}
-          </Panel>
-        ))}
-      </Collapse>
+      {/* <div className="actions"> show Actions</div> */}
+      {isEmpty(data) ? (
+        <div className="posts-empty">
+          <Empty description="暂无数据" />
+          <Button style={{ marginTop: 20, width: 120 }} type="primary">去提问</Button>
+        </div>
+      ) : (
+        <Collapse
+          expandIcon={({ isActive }) => (
+            <Icon symbol={isActive ? 'icon-arrow-down-filling' : 'icon-arrow-right-filling'} />
+          )}
+          bordered={false}
+          className="post-collapse"
+          activeKey={activeKeys}
+          onChange={onCollapseChange}
+        >
+          {data.map((dis) => (
+            <Panel header={dis.title} key={dis.id}>
+              {dis.children.map((post) => (
+                <Post
+                  key={post.id}
+                  data={post}
+                  keyword={keyword}
+                  unread={!postViewStatus[post.id]}
+                  onClick={handlePostClick}
+                />
+              ))}
+            </Panel>
+          ))}
+        </Collapse>
+      )}
     </div>
   )
 }
