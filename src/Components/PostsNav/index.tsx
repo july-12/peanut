@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState, useMemo } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import dayjs from 'dayjs'
-import { keys, isEmpty } from 'lodash'
+import { keys, isEmpty, debounce, filter } from 'lodash'
 import clns from 'classnames'
 import { Collapse, Button, Input } from 'antd'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
@@ -58,6 +58,7 @@ const PostsNav = () => {
 
   const dispatch = useDispatch()
   const [activeKeys, setActiveKeys] = useState<string | string[]>([])
+  const [keyword, setKeyword] = useState('')
 
   const {
     tag: { selectedQueryTags },
@@ -79,15 +80,26 @@ const PostsNav = () => {
     const starttime = dayjs(timestr)
     return `WEEK ${starttime.format('MM/DD')} - ${starttime.add(7, 'day').format('MM/DD')}`
   }
+
+  const filterPostsBySearch = (posts: IPost[]) => {
+    if (keyword) {
+      return filter(
+        posts,
+        (post) => post.title.includes(keyword) || post.content?.includes(keyword)
+      )
+    }
+    return posts
+  }
+
   const data = keys(weeklyList).map((key) => {
     return {
       id: key,
       title: formatWeekly(key),
-      children: weeklyList[key]
+      children: filterPostsBySearch(weeklyList[key])
     }
   })
 
-  const onChange = (key: string | string[]) => {
+  const onCollapseChange = (key: string | string[]) => {
     setActiveKeys(key)
   }
 
@@ -101,6 +113,18 @@ const PostsNav = () => {
       search: '?' + search.toString()
     })
   }
+
+  const handleSearchChange = debounce((e: any) => {
+    const { value } = e.target
+    setKeyword(value)
+    if (value) {
+      const activeKeys = data
+        .filter((item) => !isEmpty(filterPostsBySearch(item.children)))
+        .map((item) => item.id)
+      setActiveKeys(activeKeys)
+    }
+  }, 500)
+
   return (
     <div className="posts">
       <header>
@@ -111,7 +135,13 @@ const PostsNav = () => {
         >
           提 问
         </Button>
-        <Input placeholder="请输入查询字段" prefix={<Icon symbol="icon-search" />} />
+        <Input
+          allowClear
+          placeholder="请输入查询字段"
+          prefix={<Icon symbol="icon-search" />}
+          // value={keyword}
+          onChange={handleSearchChange}
+        />
       </header>
       <div className="tags"></div>
 
@@ -124,7 +154,7 @@ const PostsNav = () => {
         bordered={false}
         className="post-collapse"
         activeKey={activeKeys}
-        onChange={onChange}
+        onChange={onCollapseChange}
       >
         {data.map((dis) => (
           <Panel header={dis.title} key={dis.id}>
