@@ -24,6 +24,7 @@ const CreatePost = () => {
   const handleSubmit = async (value: any) => {
     value.post.course_id = params.classId
     const res = await dispatch.post.createPost(value)
+    await dispatch.post.getPostsByWeekly({ course_id: params.classId })
     navigate(`/class/${params.classId}/posts/${res.id}`)
   }
   return (
