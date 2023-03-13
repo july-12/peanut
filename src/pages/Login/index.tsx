@@ -45,7 +45,6 @@ const Login = () => {
       setNoMatch(true)
     }
   }
-  location
 
   return (
     <div className="login-wrap">

@@ -19,7 +19,7 @@ const NoMatch = () => {
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.VITE_BASENAME}>
       <Routes>
         <Route path="/" element={<BasicLayout />}>
           <Route index element={<HomePage />} />
