@@ -18,7 +18,7 @@ COPY . /app
 ENV CI=true
 ENV PORT=5173
 
-CMD [ "npm", "dev" ]
+# CMD [ "npm", "build" ]
 
 FROM development AS build
 
