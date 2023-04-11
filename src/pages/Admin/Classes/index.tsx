@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useStore, Dispatch } from '@/store'
 import { IClass } from '@/models/class'
 import { useDispatch } from 'react-redux'
@@ -11,6 +12,7 @@ interface DataType extends IClass {}
 const ClassList = () => {
   const [visible, setVisible] = useState(false)
   const [editClassItem, setEditClassItem] = useState<any>()
+  const navigate = useNavigate()
   const store = useStore('class')
   const dispatch = useDispatch<Dispatch>()
 
@@ -31,7 +33,12 @@ const ClassList = () => {
   const columns: ColumnsType<DataType> = [
     {
       title: '课程名称',
-      dataIndex: 'title'
+      dataIndex: 'title',
+      render: (text, record) => (
+        <Button type="text" onClick={() => navigate(`/class/${record.id}`)}>
+          {text}
+        </Button>
+      )
     },
     {
       title: '课程介绍',

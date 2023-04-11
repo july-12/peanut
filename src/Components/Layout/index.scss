@@ -10,6 +10,26 @@ $header-bg: #3e7aab;
   &-header {
     height: $header-height;
     background-color: $header-bg;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    #logo {
+      font-size: 28px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .extra {
+      color: #eaeaea;
+      .user-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+      }
+    }
   }
   &-content {
     flex: 1;
@@ -23,27 +43,5 @@ $header-bg: #3e7aab;
   }
   &-slider {
     width: 300px;
-  }
-}
-
-.layout-header-class {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 32px;
-  #logo {
-    font-size: 28px;
-    font-weight: 600;
-    color: #fff;
-  }
-  .extra {
-    color: #eaeaea;
-    .user-info {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 10px;
-    }
   }
 }

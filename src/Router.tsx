@@ -7,8 +7,11 @@ import Post from '@/pages/Posts/Post'
 import PostCreate from '@/pages/Posts/Create'
 import PostLanding from '@/pages/Posts/Landing'
 import HomePage from '@/pages/HomePage'
-import Classes from '@/pages/Classes'
-import Landing from '@/pages/Classes/Landing'
+import Classes from '@/pages/Admin/Classes'
+import Dashboard from '@/pages/Admin/Dashboard'
+import Users from '@/pages/Admin/Users'
+import Setting from '@/pages/Admin/Setting'
+import Landing from '@/pages/Admin/Classes/Landing'
 import Login from '@/pages/Login'
 import AuthGithubCallbackLanding from '@/pages/Login/AuthGithubCallbackLanding'
 import Forbidden from '@/pages/Forbidden'
@@ -35,7 +38,10 @@ const Router = () => {
             </Route>
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="classes" element={<Classes />} />
+            <Route path="users" element={<Users />} />
+            <Route path="setting" element={<Setting />} />
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />

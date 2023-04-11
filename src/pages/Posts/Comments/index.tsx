@@ -47,7 +47,7 @@ const Comments = () => {
                   {comment.creator.name}
                   <span>{dayjs(comment.created_at).fromNow()}</span>
                 </header>
-                <main>{comment.content}</main>
+                <main dangerouslySetInnerHTML={{ __html: comment.content }} />
                 <div className="replies">
                   {map(comment.replies, (reply) => (
                     <div key={reply.id} className="reply-item comment-box">
@@ -57,7 +57,7 @@ const Comments = () => {
                           {reply.creator.name}
                           <span>{dayjs(reply.created_at).fromNow()}</span>
                         </header>
-                        <main>{reply.content}</main>
+                        <main dangerouslySetInnerHTML={{ __html: reply.content }} />
                       </div>
                     </div>
                   ))}

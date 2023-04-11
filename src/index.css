@@ -4,9 +4,9 @@ body,
   height: 100vh;
 }
 
-.list-wrap {
+/* .list-wrap {
   padding: 10px 16px;
-}
+} */
 
 .list-wrap > header {
   display: flex;

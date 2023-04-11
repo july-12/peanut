@@ -10,6 +10,7 @@ export const postsExtra = {
     return request.get<T>(`${baseURL}/posts/weekly`, { params }).then((res) => res.data)
   }
 }
+export const users = createRestfulApi('users')
 export const comments = createRestfulApi('comments')
 export const tags = createRestfulApi('tags')
 // export const comments = createRestfulDynamiclyApi<{ postId: number }>(({ postId }) => {
