@@ -1,15 +1,16 @@
 import dayjs from 'dayjs'
 import { map } from 'lodash'
+import { useParams } from 'react-router-dom'
 import { useStore, Dispatch } from '@/store'
 import { useDispatch } from 'react-redux'
 import { message } from 'antd'
 import Avatar from '@/Components/Avatar'
+import InnerHTML from '@/Components/InnerHTML'
 import Form from './Form'
 import { ICommentFormValue } from '@/models/comments'
 
 import './index.scss'
 import './comment.scss'
-import { useParams } from 'react-router-dom'
 
 const Comments = () => {
   const [messageApi, contextHolder] = message.useMessage()
@@ -47,7 +48,7 @@ const Comments = () => {
                   {comment.creator.name}
                   <span>{dayjs(comment.created_at).fromNow()}</span>
                 </header>
-                <main dangerouslySetInnerHTML={{ __html: comment.content }} />
+                <InnerHTML html={comment.content} />
                 <div className="replies">
                   {map(comment.replies, (reply) => (
                     <div key={reply.id} className="reply-item comment-box">
@@ -57,7 +58,7 @@ const Comments = () => {
                           {reply.creator.name}
                           <span>{dayjs(reply.created_at).fromNow()}</span>
                         </header>
-                        <main dangerouslySetInnerHTML={{ __html: reply.content }} />
+                        <InnerHTML html={reply.content} />
                       </div>
                     </div>
                   ))}

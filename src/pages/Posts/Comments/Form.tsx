@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useStore } from '@/store'
 import { Form, Input, Button } from 'antd'
 import Avatar from '@/Components/Avatar'
+import RichTextor from '@/Components/RichTextor'
 
 import './comment.scss'
 import './form.scss'
@@ -53,9 +54,10 @@ const CommentForm = (props: Partial<IProps>) => {
       >
         <Form.Item
           name='content'
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          style={{ height: 160 }}
+          rules={[{ required: true, message: '请输入内容' }]}
         >
-          <Input.TextArea ref={textareaRef} rows={6} placeholder="请输入内容" />
+          <RichTextor ref={textareaRef} style={{ height: 120 }} placeholder="请输入内容" />
         </Form.Item>
         <Form.Item>
           <Button style={{ width: 100 }} type="primary" htmlType="submit">

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input, Button } from 'antd'
 import TagsSelector from '@/Components/TagsSelector'
+import RichTextor from '@/Components/RichTextor'
 
 interface IProps {
   data: any
@@ -36,9 +37,10 @@ const PostForm = (props: Partial<IProps>) => {
       <Form.Item
         label="内容"
         name={['post', 'content']}
+        style={{ height: 240 }}
         rules={[{ required: true, message: '请输入内容' }]}
       >
-        <Input.TextArea rows={10} placeholder="请输入内容" />
+        <RichTextor style={{ height: 200 }} placeholder="请输入内容" />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4, span: 18 }}>

@@ -4,6 +4,7 @@ import { map } from 'lodash'
 import { Tag } from 'antd'
 import { useParams } from 'react-router-dom'
 import { useStore, Dispatch } from '@/store'
+import InnerHTML from '@/Components/InnerHTML'
 import { useDispatch } from 'react-redux'
 import CommentList from './Comments'
 
@@ -46,7 +47,7 @@ const Post = () => {
           <span>{dayjs(post?.created_at).fromNow()} 创建</span>
         </div>
         <div className="post-text">
-          {post?.content && <div dangerouslySetInnerHTML={{ __html: post.content }}></div>}
+          {post?.content && <InnerHTML html={post?.content} />}
           {renderTags()}
         </div>
       </div>

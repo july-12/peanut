@@ -22,10 +22,14 @@ interface IPostProps {
 
 const POST_STORAGE_KEY = 'POST_VIEW_STATUS_STORAGE'
 const Post = (props: IPostProps) => {
+  const { id } = useParams()
   const { data } = props
   return (
     <div
-      className={clns('post-item', { [`post-item-${data.status}`]: !!data.status })}
+      className={clns('post-item', {
+        'post-item-active': +data.id === +id!,
+        [`post-item-${data.status}`]: !!data.status
+      })}
       onClick={() => props.onClick(data.id)}
     >
       <div className="post-item-read-status">{props.unread && <span className="dot" />}</div>
@@ -159,7 +163,9 @@ const PostsNav = () => {
       {isEmpty(data) ? (
         <div className="posts-empty">
           <Empty description="暂无数据" />
-          <Button style={{ marginTop: 20, width: 120 }} type="primary">去提问</Button>
+          <Button style={{ marginTop: 20, width: 120 }} type="primary">
+            去提问
+          </Button>
         </div>
       ) : (
         <Collapse

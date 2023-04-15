@@ -11,14 +11,17 @@
       font-size: 15px;
       font-weight: bold;
       color: #777;
+      height: 38px;
+      display: flex;
+      align-items: center;
       & > span {
         margin-left: 10px;
         color: #aaa;
         font-size: 12px;
       }
     }
-    main {
-      padding: 10px 0;
-    }
+    // main {
+    //   padding: 10px 0;
+    // }
   }
 }

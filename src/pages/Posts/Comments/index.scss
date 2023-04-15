@@ -10,7 +10,7 @@
   & > main {
     padding: 0 16px;
     .comment-item {
-      background: #f6f7f6;
+      // background: #f6f7f6;
       min-height: 100px;
       padding: 10px;
       border-bottom: 1px solid rgba(127, 127, 127, 0.1);
@@ -30,7 +30,6 @@
     gap: 10px;
     .reply-item {
       padding: 10px 6px;
-      background-color: #eeeeee;
       border-radius: 4px;
     }
   }

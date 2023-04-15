@@ -8,6 +8,7 @@ import Categories from '@/Components/Categories'
 import PostsNav from '@/Components/PostsNav'
 import { Dispatch } from '@/store'
 import { useDispatch } from 'react-redux'
+import "highlight.js/styles/atom-one-dark.css"
 
 const ClassLayout = () => {
   const dispatch = useDispatch<Dispatch>()
