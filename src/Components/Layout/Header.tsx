@@ -50,7 +50,9 @@ const Header = (props: IProps) => {
   }
   return (
     <div {...restProps} className={clns('layout-header', className)}>
-      <div id="logo">Peanut</div>
+      <div id="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        Peanut
+      </div>
       <div className="extra">
         {store.user.currentUser ? (
           renderUser()

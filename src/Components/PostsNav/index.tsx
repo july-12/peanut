@@ -43,7 +43,7 @@ const Post = (props: IPostProps) => {
           </div>
         </div>
         <Paragraph className="summary" ellipsis={{ rows: 2 }}>
-          <HighlightText text={data.content} highlight={props.keyword} />
+          <HighlightText text={data.content.replace( /(<([^>]+)>| )/ig, '')} highlight={props.keyword} />
         </Paragraph>
       </main>
       <div className="post-item-actions">
