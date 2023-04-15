@@ -21,7 +21,7 @@ instance.interceptors.response.use(
       if (getToken()) {
         removeToken()
       }
-      window.location.href = `${import.meta.env.VITE_BASENAME}/forbidden`
+      window.location.href = `${import.meta.env.VITE_BASENAME || ''}/forbidden`
     }
     return Promise.reject(error)
   }

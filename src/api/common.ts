@@ -9,7 +9,7 @@ export function login(value: { name: string; password: string }) {
 
 export function github_authorize(code: string) {
   return request
-    .get<{ token: string }>(`${baseURL}${import.meta.env.VITE_BASENAME}/auth/github/callback`, { params: { code } })
+    .get<{ token: string }>(`${baseURL}${import.meta.env.VITE_BASENAME || ''}/auth/github/callback`, { params: { code } })
     .then((res) => res.data)
 }
 

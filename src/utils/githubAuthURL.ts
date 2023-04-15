@@ -3,7 +3,7 @@ export function getGitHubAuthorizeUrl(from?: string) {
   
     const options = {
       client_id: import.meta.env.VITE_GITHUB_OAUTH_CLIENT_ID as string,
-      redirect_uri: `${window.location.origin}${import.meta.env.VITE_BASENAME}/auth/github/callback`,
+      redirect_uri: `${window.location.origin}${import.meta.env.VITE_BASENAME || ''}/auth/github/callback`,
     //   scope: "user:email",
     //   state: from,
     };
