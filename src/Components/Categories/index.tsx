@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
-import { map, isEqual } from 'lodash'
+import { map, slice, isEqual, isEmpty } from 'lodash'
 import { useStore, useDispatch } from '@/store'
-import { Tag, Button } from 'antd'
+import { Tag, Button, Dropdown } from 'antd'
+import type { MenuProps } from 'antd'
 import Icon from '@/Components/Icon'
 
 import './index.scss'
 
+const MaxTagCount = 5
 const Categories = () => {
   const [query] = useSearchParams()
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch()
   const {
-    tag: { list, selectedQueryTags = [] }
+    tag: { list: tags, selectedQueryTags = [] }
   } = useStore('tag')
+  const list = slice(tags, 0, MaxTagCount)
+  const moreList = slice(tags, MaxTagCount)
 
   const tagsStr = query.get('tags')
 
@@ -44,6 +48,23 @@ const Categories = () => {
       search: '?' + query.toString()
     })
   }
+  const items: MenuProps['items'] = map(moreList, (item) => ({
+    key: item.id,
+    label: item.name
+  }))
+  const renderMoreTags = () => {
+    return (
+      <div className="more-tags">
+        {map(moreList, (item) => (
+          <div key={item.id} className="tag-item">
+            {item.color && <span className="spot" style={{ backgroundColor: item.color }} />}
+            {item.name}
+            <span className="count">{item.posts.length}</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
   return (
     <div className="categories">
       <span className="categories-label">标签: </span>
@@ -60,11 +81,20 @@ const Categories = () => {
           )}
         </div>
       ))}
-      <div className="category-item">
-        <Button type="text" size="small" onClick={handleClearTag}>
-          清空
-        </Button>
-      </div>
+      {tagsStr && (
+        <div className="category-item">
+          <Button type="text" size="small" onClick={handleClearTag}>
+            清空
+          </Button>
+        </div>
+      )}
+      {!isEmpty(moreList) && (
+        <Dropdown dropdownRender={renderMoreTags} trigger={['click']} placement="bottomRight">
+          <div className="more-tags-icon">
+            <Icon symbol="icon-arrow-down-filling" />
+          </div>
+        </Dropdown>
+      )}
     </div>
   )
 }
